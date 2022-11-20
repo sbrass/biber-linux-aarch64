@@ -1,0 +1,15 @@
+# Emacs backup files
+*~
+
+# Build artefacts
+biber
+biblex
+bibparse
+dumpnames
+
+# Other
+package/biber-linux.tar.gz
+package/biber-linux_aarch64.tar.gz
+biber-linux_aarch64.tar.gz
+*.blg
+*.bbl

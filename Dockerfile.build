@@ -1,0 +1,84 @@
+FROM perl:5.36.0-buster
+
+RUN apt-get update && apt-get upgrade -y \
+    && rm -rf /var/lib/apt/lists/*
+
+ENV PERL_CPANM_OPT --verbose --mirror https://cpan.metacpan.org --mirror-only
+ENV PERL_TEST_POD=1
+
+RUN cpanm CPAN
+RUN cpanm Test::Regexp
+RUN cpanm Test::Pod
+RUN cpanm inc::latest
+# RUN cpanm Archive::Zip
+# hadolint ignore=DL3003
+RUN git clone https://github.com/redhotpenguin/perl-Archive-Zip.git && cd perl-Archive-Zip/ && perl Makefile.PL && make && make test && make install && cd /
+RUN cpanm Net::SSLeay
+RUN cpanm IO::Socket::SSL
+RUN cpanm LWP::Protocol::https
+RUN cpanm Business::ISBN
+RUN cpanm Business::ISMN
+RUN cpanm Business::ISSN
+RUN cpanm Class::Accessor
+RUN cpanm Data::Compare
+RUN cpanm Data::Dump
+RUN cpanm Data::Uniqid
+RUN cpanm Dist::CheckConflicts
+#RUN cpanm Module::Runtime
+RUN cpanm DateTime::Calendar::Julian
+RUN cpanm DateTime::Format::Builder
+RUN cpanm Encode::EUCJPASCII
+RUN cpanm Encode::HanExtra
+RUN cpanm Encode::JIS2K
+RUN cpanm File::Slurper
+RUN cpanm Lingua::Translit
+RUN cpanm List::AllUtils
+RUN cpanm List::MoreUtils
+RUN cpanm List::MoreUtils::XS
+RUN cpanm Log::Log4perl
+RUN cpanm PerlIO::utf8_strict
+RUN cpanm Parse::RecDescent
+RUN cpanm Regexp::Common
+RUN cpanm Sort::Key
+RUN cpanm Text::BibTeX
+RUN cpanm Text::CSV
+RUN cpanm Text::CSV_XS
+RUN cpanm Text::Roman
+# Force installation of Unicode::* modules (as they already exist as core modules).
+RUN cpanm --force Unicode::Collate::Locale
+RUN cpanm --force Unicode::Collate
+RUN cpanm --force Unicode::GCString
+RUN cpanm --force Unicode::LineBreak
+RUN cpanm XML::LibXML
+RUN cpanm XML::LibXML::Simple
+RUN cpanm XML::LibXSLT
+RUN cpanm XML::Writer
+RUN cpanm autovivification
+RUN cpanm Config::AutoConf
+RUN cpanm ExtUtils::LibBuilder
+RUN cpanm File::Which
+RUN cpanm Test::Differences
+RUN cpanm IO::String
+RUN cpanm Unicode::Normalize
+RUN cpanm Getopt::ArgvFile
+RUN cpanm Module::ScanDeps
+RUN cpanm PAR
+RUN cpanm PAR::Dist
+RUN perl -MCPAN -e 'my $c = "CPAN::HandleConfig"; $c->load(doit => 1, autoconfig => 1); $c->edit(recommends_policy => "0"); $c->commit'
+RUN cpanm PAR::Packer
+
+
+# RUN cpan \
+    # Module::Build \
+    # && cpan -f Unicode::Collate::Locale
+
+# https://docs.docker.com/engine/reference/builder/#copy---link
+# COPY --link biberbuild.sh /
+COPY biberbuild.sh /root
+
+WORKDIR /root
+
+# https://docs.docker.com/engine/reference/builder/#exec-form-entrypoint-example
+ENTRYPOINT ["./biberbuild.sh"]
+# BIBER_BRANCH and BIBER_REPO
+CMD ["dev", "plk/biber"]

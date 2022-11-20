@@ -1,0 +1,7 @@
+FROM debian:stable-slim
+
+COPY test-dev.bcf /
+COPY test.bib /
+COPY bibertest.sh /
+
+CMD [ "./bibertest.sh" ]

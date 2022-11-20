@@ -1,0 +1,40 @@
+= Building biber under Linux AArch64
+
+Fork from: https://github.com/krumeich/biber-alpine.
+For detailed explanations of the setup, visit the original project.
+
+The TeX Live distribution does not provide biber for AArch64-based Linux distros
+ for Raspberry4 or AWS Instance with Graviton Processors.
+
+The repository provides the necessary environment using self-built Docker images and runs the build process of `biber` itself within this environment.
+
+A test setup allows to verify that the packaging process was successful and no dependency is missing using an scarce Debian image.
+
+The resulting binary can then be packaged and uploaded to https://ctan.org.
+
+== Building
+
+The project provides a (GNU) Makefile to ease the build of the Docker images involved and run the Docker container to build and test `biber` binary.
+[.source,bash]
+----
+make BRANCH="v2.18" REPO="plk/biber" test
+make BRANCH="v2.18" REPO="plk/biber" package
+----
+Alternatively, run:
+[.source,bash]
+----
+make BRANCH="..." REPO="..." all
+----
+
+The environment variables `BRANCH` and `REPO` allow to access a specific version or the development branch of the repository found at `https://github.com/REPO`.
+`BRANCH` defaults to `dev` and `REPO` to `plk/biber`.
+
+== Uploading
+
+The `biber` binary is packed as `biber-linux_aarch64.tar.gz` and needs to be wrapped in another archive with the readme from `package/README`.
+[.source,bash]
+----
+mv biber-linux_aarch64.tar.gz && \
+  cd package && \
+  tar cvf biber-linux.tar.gz README biber-linux_aarch64.tar.gz
+----
