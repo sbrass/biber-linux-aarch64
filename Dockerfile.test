@@ -1,7 +1,8 @@
 FROM debian:stable-slim
 
-COPY test-dev.bcf /
-COPY test.bib /
-COPY bibertest.sh /
+RUN apt update && apt upgrade && apt -y install wget
 
-CMD [ "./bibertest.sh" ]
+ADD bibertest.sh /
+
+ENTRYPOINT [ "./bibertest.sh" ]
+CMD ["dev", "plk/biber"]
