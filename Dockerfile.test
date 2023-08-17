@@ -1,8 +1,10 @@
-FROM debian:stable-slim
+FROM debian:buster-slim
 
-RUN apt update && apt upgrade && apt -y install wget
+RUN apt-get update && apt-get upgrade -y \
+    && apt-get -y --no-install-recommends install wget ca-certificates \
+    && rm -rf /var/lib/apt/lists/*
 
-ADD bibertest.sh /
+COPY bibertest.sh /
 
 ENTRYPOINT [ "./bibertest.sh" ]
 CMD ["dev", "plk/biber"]
