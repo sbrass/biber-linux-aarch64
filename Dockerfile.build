@@ -1,7 +1,7 @@
-FROM perl:5.36.0-buster
+FROM perl:5.36.1-bookworm
 
 RUN apt-get update && apt-get upgrade -y \
-    && apt install -y libbtparse-dev \
+    && apt-get install -y --no-install-recommends libbtparse-dev=0.89-1 \
     && rm -rf /var/lib/apt/lists/*
 
 ENV PERL_CPANM_OPT --verbose --mirror https://cpan.metacpan.org --mirror-only
