@@ -25,3 +25,6 @@ package: $(BIBER_ARCHIVE)
 
 $(BIBER_ARCHIVE): $(BIBER_BINARY)
 	tar czf $(BIBER_ARCHIVE) $^
+
+ctan: test
+	./biberpackage.sh
