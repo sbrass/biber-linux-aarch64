@@ -29,6 +29,12 @@ make BRANCH="..." REPO="..." all
 The environment variables `BRANCH` and `REPO` allow to access a specific version or the development branch of the repository found at `https://github.com/REPO`.
 `BRANCH` defaults to `dev` and `REPO` to `plk/biber`.
 
+For debug purpose, add a run option to add a `DEBUG` environment variable (unequal to `false`):
+[.source,bash]
+----
+make BRANCH="biber-linux-aarch64" REPO="sbrass/biber" RUN_OPTION="-e DEBUG=true"
+----
+
 == Uploading
 
 The `biber` binary is packed as `biber-linux_aarch64.tar.gz` and needs to be wrapped in another archive with the readme from `package/README`.

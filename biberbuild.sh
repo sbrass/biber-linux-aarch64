@@ -4,6 +4,8 @@ BIBER_BRANCH="${1:-dev}"
 BIBER_REPO="${2:-plk/biber}"
 BIBER_BINARY=biber-linux_arm64
 
+test -z "${DEBUG}" && DEBUG="false"
+
 ARCH="$(uname -a | rev | cut -d' ' -f2 | rev)"
 
 echo "Building branch: ${BIBER_BRANCH} of ${BIBER_REPO}"
@@ -15,7 +17,7 @@ echo "Building branch: ${BIBER_BRANCH} of ${BIBER_REPO}"
      cd biber && \
      git checkout "${BIBER_BRANCH}" && \
      {
-         [[ "${BIBER_BRANCH}" < "v2.19" ]] && EMAIL="Castor Fiber <castor.fiber@localhost>" git cherry-pick e747c71e7cd2df5677f41908ee1baacd4877281c;
+         [[ "${DEBUG}" = false && "${BIBER_BRANCH}" < "v2.19" ]] && EMAIL="Castor Fiber <castor.fiber@localhost>" git cherry-pick e747c71e7cd2df5677f41908ee1baacd4877281c;
          : # Important: exit sub-shell with return status 'zero', c.f. Bash
          # manual, 4.1 Bourne Shell Builtins.
      } && \
