@@ -16,3 +16,4 @@ repos:
     rev: v2.10.0
     hooks:
       - id: hadolint
+        args: ["--failure-threshold=error"]
