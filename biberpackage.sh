@@ -1,6 +1,7 @@
 #!/bin/sh
 
-BIBER_VERSION=$(docker run --rm -v "$(pwd):/usr/local/bin" debian:stable-slim /usr/local/bin/biber --version | sed "s,biber version: \([[:digit:]]\+\.[[:digit:]]\+\).*,\1,")
+BIBER_VERSION=$(docker run --rm -v "$(pwd):/usr/local/bin" debian:stable-slim /usr/local/bin/biber --version | \
+                    sed "s/biber version: \([[:digit:]]\{1,\}\.[[:digit:]]\{1,\}\).*/\1/")
 PRODUCT=biber
 METAPLATFORM=linux
 METAPLATFORM_DIR="${PRODUCT}-${METAPLATFORM}"
