@@ -2,9 +2,9 @@
 
 BIBER_VERSION=$(docker run --rm -v "$(pwd):/usr/local/bin" debian:stable-slim /usr/local/bin/biber --version | sed "s,biber version: \([[:digit:]]\+\.[[:digit:]]\+\).*,\1,")
 PRODUCT=biber
-METAPLATFORM=linux
+METAPLATFORM=linux-aarch64
 METAPLATFORM_DIR="${PRODUCT}-${METAPLATFORM}"
-ARCHIVE="${PRODUCT}-${BIBER_VERSION}-${METAPLATFORM}_aarch64.tar.gz"
+ARCHIVE="${PRODUCT}-${BIBER_VERSION}-${METAPLATFORM}.tar"
 
 rm -rf "${METAPLATFORM_DIR}"
 mkdir -p "${METAPLATFORM_DIR}"

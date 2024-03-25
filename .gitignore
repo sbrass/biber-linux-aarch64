@@ -8,8 +8,8 @@ bibparse
 dumpnames
 
 # Other
-biber-linux/
-biber-linux.tar.gz
+biber-linux-aarch64/
+biber-linux-aarch64.tar.gz
 package/biber-linux.tar.gz
 package/biber-linux_aarch64.tar.gz
 biber-linux_aarch64.tar.gz
