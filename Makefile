@@ -1,6 +1,7 @@
 BIBER_BINARY := biber
 BIBER_ARCHIVE := biber-linux_aarch64.tar.gz
 OTHER_BINARIES := biblex bibparse dumpnames
+DOCKER_TAG ?= latest
 
 .PHONY: all image biber test test-image clean upload package
 
@@ -9,8 +10,8 @@ all: test
 image:
 	docker build $(CACHE_OPTION) -f Dockerfile.build --tag sbrass/biber-aarch64 .
 
-$(BIBER_BINARY): image
-	docker run --rm -v $(PWD):/opt sbrass/biber-aarch64 $(BRANCH) $(REPO)
+$(BIBER_BINARY): 
+	echo docker run --rm -v $(PWD):/opt sbrass/biber-aarch64:$(DOCKER_TAG) $(BRANCH) $(REPO)
 
 test-image:
 	docker build $(CACHE_OPTION) -f Dockerfile.test --tag sbrass/biber-test .
