@@ -29,6 +29,8 @@ make BRANCH="..." REPO="..." all
 The environment variables `BRANCH` and `REPO` allow to access a specific version or the development branch of the repository found at `https://github.com/REPO`.
 `BRANCH` defaults to `dev` and `REPO` to `plk/biber`.
 
+Furthermore, the environment variable `DOCKER_TAG` specifies which tag for the Docker image `sbrass/biber-aarch64` will be used. `DOCKER_TAG` defaults to `latest`. The maintainers will keep the version tags of the Docker image in sync with the tags used in this repo. This, in turn, is related to the tag used in the `plk/biber` repo.
+
 == Uploading
 
 The `biber` binary is packed as `biber-linux_aarch64.tar.gz` and needs to be wrapped in another archive with the readme from `package/README`.
