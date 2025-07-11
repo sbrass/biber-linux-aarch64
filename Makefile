@@ -11,7 +11,7 @@ image:
 	docker build $(CACHE_OPTION) -f Dockerfile.build --tag sbrass/biber-aarch64 .
 
 $(BIBER_BINARY): 
-	echo docker run --rm -v $(PWD):/opt sbrass/biber-aarch64:$(DOCKER_TAG) $(BRANCH) $(REPO)
+	docker run --rm -v $(PWD):/opt sbrass/biber-aarch64:$(DOCKER_TAG) $(BRANCH) $(REPO)
 
 test-image:
 	docker build $(CACHE_OPTION) -f Dockerfile.test --tag sbrass/biber-test .
