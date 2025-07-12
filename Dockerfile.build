@@ -63,6 +63,8 @@ RUN cpanm CPAN \
 && cpanm Unicode::Normalize \
 && cpanm Getopt::ArgvFile \
 && cpanm Module::ScanDeps \
+&& cpanm Specio::XS \
+&& cpanm Specio::PP \
 && cpanm PAR \
 && cpanm PAR::Dist \
 && perl -MCPAN -e 'my $c = "CPAN::HandleConfig"; $c->load(doit => 1, autoconfig => 1); $c->edit(recommends_policy => "0"); $c->commit' \
