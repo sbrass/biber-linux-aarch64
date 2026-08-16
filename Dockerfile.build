@@ -24,7 +24,7 @@ RUN cpanm CPAN \
 && cpanm Data::Dump \
 && cpanm Data::Uniqid \
 && cpanm Dist::CheckConflicts \
-#&& cpanm Module::Runtime \
+&& cpanm Module::Runtime \
 && cpanm DateTime::Calendar::Julian \
 && cpanm DateTime::Format::Builder \
 && cpanm Encode::EUCJPASCII \
