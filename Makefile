@@ -11,13 +11,13 @@ image:
 	docker build $(CACHE_OPTION) -f Dockerfile.build --tag sbrass/biber-aarch64 .
 
 $(BIBER_BINARY): 
-	docker run --rm -v $(PWD):/opt sbrass/biber-aarch64:$(DOCKER_TAG) $(BRANCH) $(REPO)
+	docker run --rm -v $(PWD):/opt -e branch=$(BRANCH) -e repo=$(REPO) sbrass/biber-aarch64:$(DOCKER_TAG)
 
 test-image:
 	docker build $(CACHE_OPTION) -f Dockerfile.test --tag sbrass/biber-test .
 
 test: $(BIBER_BINARY) test-image
-	docker run --rm -v $(PWD):/opt sbrass/biber-test $(BRANCH) $(REPO)
+	docker run --rm -v $(PWD):/opt -e branch=$(BRANCH) -e repo=$(REPO) sbrass/biber-test
 
 clean:
 	rm -f $(BIBER_BINARY) $(BIBER_ARCHIVE) $(OTHER_BINARIES)

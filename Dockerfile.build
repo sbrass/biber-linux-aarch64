@@ -80,6 +80,7 @@ COPY biberbuild.sh /root
 WORKDIR /root
 
 # https://docs.docker.com/engine/reference/builder/#exec-form-entrypoint-example
-ENTRYPOINT ["./biberbuild.sh"]
+#ENTRYPOINT ["./biberbuild.sh"]
 # BIBER_BRANCH and BIBER_REPO
-CMD ["dev", "plk/biber"]
+#CMD ["dev", "plk/biber"]
+CMD ["/root/biberbuild.sh"]

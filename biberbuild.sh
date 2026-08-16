@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-BIBER_BRANCH="${1:-dev}"
-BIBER_REPO="${2:-plk/biber}"
+BIBER_BRANCH=${branch:-dev}
+BIBER_REPO=${repo:-plk/biber}
 BIBER_BINARY=biber-linux_arm64
 
 ARCH="$(uname -a | rev | cut -d' ' -f2 | rev)"
@@ -21,6 +21,6 @@ perl ./Build.PL && ./Build installdeps && \
 cd ./dist/linux_"${ARCH}"
 bash ./build.sh
 
-if test -f biber/dist/linux_"${ARCH}"/"${BIBER_BINARY}"; then
-    cp biber/dist/linux_"${ARCH}"/"${BIBER_BINARY}" /opt/biber
+if test -f /root/biber/dist/linux_"${ARCH}"/"${BIBER_BINARY}"; then
+    cp /root/biber/dist/linux_"${ARCH}"/"${BIBER_BINARY}" /opt/biber
 fi
