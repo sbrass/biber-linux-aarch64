@@ -25,7 +25,7 @@ clean:
 package: $(BIBER_ARCHIVE)
 
 $(BIBER_ARCHIVE): $(BIBER_BINARY)
-	tar czf $(BIBER_ARCHIVE) $^
+	COPYFILE_DISABLE=1 tar czf $(BIBER_ARCHIVE) $^
 
 ctan: test
 	./biberpackage.sh

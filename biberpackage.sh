@@ -5,6 +5,8 @@ PRODUCT=biber
 METAPLATFORM=linux-aarch64
 METAPLATFORM_DIR="${PRODUCT}-${METAPLATFORM}"
 ARCHIVE="${PRODUCT}-${BIBER_VERSION}-${METAPLATFORM}.tar"
+# Prevent macOS extended attributes in the tar file
+export COPYFILE_DISABLE=1
 
 rm -rf "${METAPLATFORM_DIR}"
 mkdir -p "${METAPLATFORM_DIR}"
